@@ -47325,7 +47325,7 @@ PrefabInstance:
       objectReference: {fileID: 582100370}
     - target: {fileID: 6038174287135021542, guid: 61a0023e2cca9f442b255b2c16b10003, type: 3}
       propertyPath: hasDashAbility
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6038174287135021542, guid: 61a0023e2cca9f442b255b2c16b10003, type: 3}
       propertyPath: fadeCanvasGroup
@@ -47333,7 +47333,7 @@ PrefabInstance:
       objectReference: {fileID: 1841761543}
     - target: {fileID: 6038174287135021542, guid: 61a0023e2cca9f442b255b2c16b10003, type: 3}
       propertyPath: hasDoubleJumpAbility
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7046226072853102194, guid: 61a0023e2cca9f442b255b2c16b10003, type: 3}
       propertyPath: m_Name

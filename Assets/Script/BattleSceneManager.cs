@@ -3,23 +3,19 @@ using UnityEngine.UI;
 
 public class BattleSceneManager : MonoBehaviour
 {
-    public GameObject soul;             
-    public Button fightButton;          
-    public GameObject fightbar;         
-    public EnemyController enemy;       
+    public GameObject soul;
+    public Button fightButton;
+    public GameObject fightbar;
+    public EnemyController enemy;
 
     private bool isFightBarActive = false;
 
     void Start()
     {
-        if (soul != null)
-            soul.SetActive(false);
-
-        if (fightbar != null)
-            fightbar.SetActive(false);
-
-        if (fightButton != null)
-            fightButton.onClick.AddListener(OnFightButtonClicked);
+        // Lượt Player bắt đầu: ẩn soul, ẩn fightbar, mở nút
+        if (soul != null) soul.SetActive(false);
+        if (fightbar != null) fightbar.SetActive(false);
+        if (fightButton != null) fightButton.onClick.AddListener(OnFightButtonClicked);
 
         fightButton.interactable = true;
     }
@@ -37,9 +33,7 @@ public class BattleSceneManager : MonoBehaviour
     {
         Debug.Log("Fight button clicked!");
 
-        if (fightbar != null)
-            fightbar.SetActive(true);
-
+        if (fightbar != null) fightbar.SetActive(true);
         fightButton.interactable = false;
         isFightBarActive = true;
     }
@@ -48,16 +42,17 @@ public class BattleSceneManager : MonoBehaviour
     {
         Debug.Log("Attacking enemy...");
 
-        if (fightbar != null)
-            fightbar.SetActive(false);
-
-        if (soul != null)
-            soul.SetActive(false);
-
+        // Ẩn fightbar (kết thúc Player Turn)
+        if (fightbar != null) fightbar.SetActive(false);
         isFightBarActive = false;
 
+        // **Hiện soul** ngay để Player có thể né đạn
+        if (soul != null) soul.SetActive(true);
+
+        // Gọi Enemy Turn
         if (enemy != null)
         {
+            // Đăng ký callback khi enemy attack xong
             var bulletPattern = enemy.GetComponent<BulletHellAttack>();
             if (bulletPattern != null)
                 bulletPattern.OnAttackFinished = OnEnemyAttackFinished;
@@ -68,12 +63,12 @@ public class BattleSceneManager : MonoBehaviour
 
     void OnEnemyAttackFinished()
     {
-        Debug.Log("Enemy attack finished. Player's turn begins again.");
+        Debug.Log("Enemy attack finished. Back to player turn.");
 
-        if (soul != null)
-            soul.SetActive(true);
+        // Ẩn soul, chuyển lại cho Player
+        if (soul != null) soul.SetActive(false);
 
-        if (fightButton != null)
-            fightButton.interactable = true;
+        // Cho phép Player bấm Fight lại
+        if (fightButton != null) fightButton.interactable = true;
     }
 }
